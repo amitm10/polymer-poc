@@ -23,7 +23,7 @@
       </px-data-table-column>
     </px-data-table>
     <px-modal open-trigger="[[trigger]]" header-text="Row Text"
-    body-text="[[cellvalue]]">
+    body-text="[[cellValue]]">
     </px-modal>
   </template>
 
@@ -37,7 +37,7 @@
        * content. Makes it easy to data-bind a tappable element to the
        * px-modal `openTrigger` property.
        */
-       cellvalue: {
+       cellValue: {
         type: String,
         value: '',
         observer: '__displayCellValue'
@@ -56,7 +56,7 @@
 
   _displayCellValue : function(e){
        var clickedRow = e.detail.row;
-       this.cellvalue = clickedRow.row.first.value;
+       this.cellValue = clickedRow.row.first.value;
   },
   });
   </script>
