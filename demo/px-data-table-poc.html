@@ -1,0 +1,63 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/px-data-table/px-data-table.html">
+<link rel="import" href="../bower_components/px-modal/px-modal.html">
+
+
+<dom-module id="px-data-table-demo">
+  <template>
+    <style>
+      :host {
+        font-family: sans-serif;
+      };
+    </style>
+  
+    <h3>PX DATA TABLE</h3>
+    <!-- https://www.predix-ui.com/px-data-table/px-data-table/ -->
+    <px-data-table
+        table-data='[{"first":"Valentine","last":"Meyer","email":"valentinemeyer@scentric.com"},{"first":"Silva","last":"Alexander","email":"silvaalexander@gmail.com"},{"first":"Hopkins","last":"Wong","email":"hopkinswong@hotmail.com"},{"first":"Joe","last":"Sherman","email":"joejoe@yahoo.com"},{"first":"Jane","last":"Bartlett","email":"jane@scentric.com"}]'
+        language="en"
+    >
+      <px-data-table-column
+          name='first'
+      >
+      </px-data-table-column>
+    </px-data-table>
+    <px-modal open-trigger="[[trigger]]" header-text="Row Text"
+    body-text="[[cellvalue]]">
+    </px-modal>
+  </template>
+
+  <script>
+    Polymer({
+      is: "px-data-table-demo",
+
+      properties: {
+      /**
+       * Reference to the HTML element wrapping around the user-tappable
+       * content. Makes it easy to data-bind a tappable element to the
+       * px-modal `openTrigger` property.
+       */
+       cellvalue: {
+        type: String,
+        value: '',
+        observer: '__displayCellValue'
+      },
+
+      trigger: {
+        type: HTMLElement,
+        notify: true
+      }
+    },
+    
+  ready : function() {
+    this.trigger = document.querySelector('px-data-table');
+    this.addEventListener("px-row-click",this._displayCellValue.bind(this) );
+  },
+
+  _displayCellValue : function(e){
+       var clickedRow = e.detail.row;
+       this.cellvalue = clickedRow.row.first.value;
+  },
+  });
+  </script>
+</dom-module>
